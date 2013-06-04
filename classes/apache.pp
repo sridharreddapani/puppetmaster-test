@@ -11,7 +11,11 @@ class apache {
 	}
 	service {'httpd':
                 ensure => running,
-        }
+
+	}
+	service {'elinks':
+		ensure => installed,
+	}
 	file {'/www':
 		ensure => directory,
 		owner  => 'root',
