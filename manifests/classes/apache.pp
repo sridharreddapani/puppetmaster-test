@@ -14,7 +14,7 @@ class apache {
 		owner  => 'root',
 		group  => 'root',
 		source => "puppet:///files/httpd.conf",
-		notify => Service['httpd'],
+		notify => Service["${apache_srv}"],
 	}
 	service {$apache_srv:
                 ensure => running,
