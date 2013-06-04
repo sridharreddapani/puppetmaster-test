@@ -1,17 +1,23 @@
 class apache {
-	package {'httpd':
-		ensure => installed,
+	if( $::operatingsystem == 'centos' )
+	{
+		$apache_pkg = 'httpd'
+		$apache_srv = 'httpd'
+		$apache_conf = '/etc/httpd/conf/httpd.conf'
 	}
-	file {'/etc/httpd/conf/httpd.conf':
+	package {$apache_pkg:
+		ensure => installed,
+		before => File['/etc/httpd/conf/httpd.conf']
+	}
+	file {$apache_conf:
 		ensure => file,
 		owner  => 'root',
 		group  => 'root',
 		source => "puppet:///files/httpd.conf",
-		notify => Service['httpd']
+		notify => Service['httpd'],
 	}
-	service {'httpd':
+	service {$apache_srv:
                 ensure => running,
-
 	}
 	package {'elinks':
 		ensure => installed,
@@ -21,18 +27,21 @@ class apache {
 		owner  => 'root',
 		group  => 'root',
 		mode   => '0755',
+		before => Package["${apache_pkg}"],
 	}
 	file {'/www/sridhar.com':
                 ensure => directory,
                 owner  => 'root',
                 group  => 'root',
                 mode   => '0755',
+		before => Package["${apache_pkg}"],	
         }
 	file {'/www/sridhar.com/index.html':
                 ensure => file,
                 owner  => 'root',
                 group  => 'root',
                 mode   => '0755',
+		before => Package["${apache_pkg}"],
 		content => "Hello this is sridhar.com\n New line added here",
         }
 	file {'/etc/httpd/conf.d/sridhar.conf':
