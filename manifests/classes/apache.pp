@@ -50,6 +50,6 @@ class apache {
                 group  => 'root',
                 mode   => '0644',
 		source => "puppet:///files/sridhar.conf",
-		notify => Service['httpd'],
+		notify => Service["${apache_srv}"],
 	}
 }
