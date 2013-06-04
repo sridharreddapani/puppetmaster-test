@@ -13,7 +13,7 @@ class apache {
                 ensure => running,
 
 	}
-	service {'elinks':
+	package {'elinks':
 		ensure => installed,
 	}
 	file {'/www':
