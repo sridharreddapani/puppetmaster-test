@@ -7,12 +7,14 @@ class user {
 	user {'sridhar':
 		ensure => present,
 		uid    => 501,
-		gid    => 'admin',
+		gid    => '501'
+		groups => 'admin',
 	}
 	user {'user01':
 		ensure => present,
                 uid    => 502,
-		gid    => 'admin',
+		gid    => 502,
+		groups => 'admin',
         }
 }
 
