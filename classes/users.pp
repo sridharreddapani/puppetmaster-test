@@ -7,7 +7,7 @@ class user {
 	user {'sridhar':
 		ensure => present,
 		uid    => 501,
-		gid    => '501'
+		gid    => '501',
 		groups => 'admin',
 	}
 	user {'user01':
