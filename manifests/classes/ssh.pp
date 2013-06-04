@@ -25,10 +25,7 @@ class ssh {
 		group  => 'root',			
 		mode   => '0700',
 	}
-									        }
 	service {'sshd':
 		ensure => running,
 	}
-	
 }
-
